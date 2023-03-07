@@ -1,20 +1,87 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
-import Step1 from "./components/Step1";
-import Step2 from "./components/Step2";
+import PersonInfo from "./components/PersonInfo";
+import Plans from "./components/Plans";
+import AddOns from "./components/AddOns";
 
 function App() {
-  const [data, setData] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    planCycle: "monthly",
+    planType: "arcade",
+    planPrice: 9,
+    online: 0,
+    storage: 0,
+    profile: 0,
+  });
+  const [current, setCurrent] = useState(1);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(formData);
+  }
+
+  function handleBack(e) {
+    e.preventDefault();
+    if (current > 1) {
+      setCurrent((prev) => {
+        return prev - 1;
+      });
+    }
+  }
+
+  function handleNext(e) {
+    e.preventDefault();
+    if (current < 5) {
+      setCurrent((prev) => {
+        return prev + 1;
+      });
+    }
+  }
+
+  useEffect(() => {
+    // Update prices of Add-ons due to plan cycle change
+    if (formData.planCycle === "yearly") {
+      const updateData = {
+        online: formData.online * 10,
+        storage: formData.storage * 10,
+        profile: formData.profile * 10,
+      };
+
+      setFormData((prev) => {
+        return { ...prev, ...updateData };
+      });
+    } else {
+      const updateData = {
+        online: formData.online / 10,
+        storage: formData.storage / 10,
+        profile: formData.profile / 10,
+      };
+
+      setFormData((prev) => {
+        return { ...prev, ...updateData };
+      });
+    }
+  }, [formData.planCycle]);
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  useEffect(() => {
+    console.log(current);
+  }, [current]);
   return (
-    <div className="App">
+    <div className="main-container">
       {/* Track all data using Object? */}
       {/* Display all form steps and highlight current */}
       <div className="form-nav">
-        <button className="active">1</button>
-        <button className="">2</button>
-        <button className="">3</button>
-        <button className="">4</button>
+        <button className={current === 1 ? "active" : ""}>1</button>
+        <button className={current === 2 ? "active" : ""}>2</button>
+        <button className={current === 3 ? "active" : ""}>3</button>
+        <button className={current === 4 ? "active" : ""}>4</button>
       </div>
 
       {/* 
@@ -33,8 +100,29 @@ function App() {
           3. Button for Next step and confirm
       */}
 
-      <Step1 />
-      <Step2 />
+      <form onSubmit={(e) => handleSubmit(e)}>
+        {current === 1 && (
+          <PersonInfo formData={formData} setFormData={setFormData} />
+        )}
+        {current === 2 && (
+          <Plans formData={formData} setFormData={setFormData} />
+        )}
+        {current === 3 && (
+          <AddOns formData={formData} setFormData={setFormData} />
+        )}
+        <div className="btn-group">
+          <button className="btn back" onClick={(e) => handleBack(e)}>
+            Go Back
+          </button>
+          {current === 4 ? (
+            <button className="btn">Submit</button>
+          ) : (
+            <button className="btn" onClick={(e) => handleNext(e)}>
+              Next Step
+            </button>
+          )}
+        </div>
+      </form>
     </div>
   );
 }

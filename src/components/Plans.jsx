@@ -5,13 +5,10 @@ import advanced from "../assets/images/icon-advanced.svg";
 import pro from "../assets/images/icon-pro.svg";
 import Switch from "@mui/material/Switch";
 
-function Step2() {
-  const [plan, setPlan] = useState({
-    cycle: "monthly",
-    type: "arcade",
-    price: 9,
-  });
-  const [isYearly, setIsYearly] = useState(false);
+function Plans({ formData, setFormData }) {
+  const [isYearly, setIsYearly] = useState(
+    formData.planCycle === "monthly" ? false : true
+  );
 
   const title = "Select your plan";
   const desc = "You have the option of monthly or yearly billing";
@@ -28,48 +25,56 @@ function Step2() {
     },
   };
 
+  // Change cost of plan based on cycle plan
   const arcadeCost = isYearly ? plans.yearly.arcade : plans.monthly.arcade;
   const advancedCost = isYearly
     ? plans.yearly.advanced
     : plans.monthly.advanced;
   const proCost = isYearly ? plans.yearly.pro : plans.monthly.pro;
 
-  function togglePlan(e) {
-    if (e.target.checked === true) {
-      setIsYearly(true);
-      setPlan((prev) => {
-        const updatePrice = plans.yearly[prev.type];
-        return { ...prev, cycle: "yearly", price: updatePrice };
-      });
-    } else {
-      setIsYearly(false);
-      setPlan((prev) => {
-        const updatePrice = plans.monthly[prev.type];
-        return { ...prev, cycle: "monthly", price: updatePrice };
-      });
-    }
-  }
-
+  // Handle when user clicks on a plan
   function handleSelect(e) {
     e.preventDefault();
     const updatePrice = Number(e.target.attributes.cost.value);
     const selectedPlan = e.target.attributes.plan.value;
-    setPlan((prev) => {
-      return { ...prev, price: updatePrice, type: selectedPlan };
-    });
 
-    e.target.classList.add("selected-plan");
-    const parent = document.getElementsByClassName("select-plans");
-    parent[0].childNodes.forEach((child) => {
-      if (child !== e.target) {
-        child.classList.remove("selected-plan");
-      }
-    });
+    // Change only if different plan is selected
+    if (formData.planType.toLowerCase() !== selectedPlan.toLowerCase()) {
+      setFormData((prev) => {
+        return { ...prev, planPrice: updatePrice, planType: selectedPlan };
+      });
+
+      // Apply and remove styling for changing selected plan
+      e.target.classList.add("selected-plan");
+      const parent = document.getElementsByClassName("select-plans");
+      parent[0].childNodes.forEach((child) => {
+        if (child !== e.target) {
+          child.classList.remove("selected-plan");
+        }
+      });
+    }
   }
 
-  useEffect(() => {
-    console.log(plan);
-  }, [plan]);
+  // Toggle between monthly and yearly plan
+  function toggleCycle(e) {
+    if (e.target.checked === true) {
+      setIsYearly(true);
+
+      // Update plan prices based on cycle change
+      setFormData((prev) => {
+        const updatePrice = plans.yearly[prev.planType];
+        return { ...prev, planCycle: "yearly", planPrice: updatePrice };
+      });
+    } else {
+      setIsYearly(false);
+
+      // Update plan prices based on cycle change
+      setFormData((prev) => {
+        const updatePrice = plans.monthly[prev.planType];
+        return { ...prev, planCycle: "monthly", planPrice: updatePrice };
+      });
+    }
+  }
 
   return (
     <FormContent title={title} desc={desc}>
@@ -130,8 +135,9 @@ function Step2() {
           <p className={isYearly ? "" : "selected-cycle"}>Monthly</p>
           <Switch
             className="switch"
-            onChange={(e) => togglePlan(e)}
+            onChange={(e) => toggleCycle(e)}
             color="default"
+            checked={formData.planCycle === "monthly" ? false : true}
           />
           <p className={isYearly ? "selected-cycle" : ""}>Yearly</p>
         </div>
@@ -140,4 +146,4 @@ function Step2() {
   );
 }
 
-export default Step2;
+export default Plans;

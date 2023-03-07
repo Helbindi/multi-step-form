@@ -39,34 +39,128 @@ h2 {
   margin: 0;
 }
 
-.form-content {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
+.main-container {
+  background-color: var(--alabaster-clr);
+  min-height: 100vh;
+  position: relative;
 }
 
 /* Form Nav CSS */
 .form-nav {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 50px;
   gap: 1em;
+  height: 200px;
+
+  background-image: url("/src/assets/images/bg-sidebar-mobile.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .form-nav button {
   padding: 10px 15px;
-  border: 2px solid black;
-  border-radius: 50%;
-
   font-weight: var(--font-wt-700);
+  font-size: 1rem;
+
+  color: var(--white-clr);
+  border: 1px solid var(--white-clr);
+  border-radius: 50%;
   background-color: transparent;
 }
 
 .active {
-  color: black;
+  color: black !important;
   background-color: var(--light-blue-clr) !important;
+  border: none !important;
 }
 
-/* Step2 CSS */
+/* Form */
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  margin-top: -8em;
+  padding: 2em;
+  background-color: var(--white-clr);
+  border-radius: 1em;
+
+  box-shadow: 3px 7px 25px black;
+}
+
+.form-content h2 {
+  color: var(--marine-blue-clr);
+}
+
+.form-content p {
+  color: var(--cool-gray-clr);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  padding-bottom: 8em;
+}
+
+.btn-group {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 75px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: var(--white-clr);
+}
+
+.btn {
+  width: 150px;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: var(--font-wt-700);
+  color: var(--white-clr);
+  background-color: var(--marine-blue-clr);
+  border-style: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.back {
+  color: var(--cool-gray-clr);
+  background-color: transparent;
+}
+
+/* Info CSS */
+.info {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  font-weight: var(--font-wt-500);
+  color: var(--marine-blue-clr);
+  gap: 5px;
+}
+
+.info input {
+  outline: none;
+  height: 2.5;
+  padding: 0.5em;
+}
+
+.info input::placeholder {
+  color: var(--cool-gray-clr);
+  font-weight: var(--font-wt-700);
+}
+
+/* Plans CSS */
 .select-plans {
   display: flex;
   flex-direction: column;
@@ -78,7 +172,8 @@ h2 {
   flex-direction: row;
   align-items: flex-start;
   gap: 1em;
-  padding: 0.5em;
+  padding: 1em;
+  font-size: 0.8rem;
 
   border: 2px solid var(--light-gray-clr);
   border-radius: 10px;
@@ -106,5 +201,29 @@ h2 {
 
 .selected-plan {
   background-color: var(--magnolia-clr) !important;
-  border: 2px solid var(--marine-blue-clr);
+  border: 3px solid var(--marine-blue-clr);
+}
+
+/* Addons CSS */
+.addon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  gap: 1em;
+  padding: 1em;
+  font-size: 0.8rem;
+
+  border: 2px solid var(--light-gray-clr);
+  border-radius: 10px;
+}
+
+.selected-addon {
+  background-color: var(--magnolia-clr) !important;
+  border: 3px solid var(--marine-blue-clr);
+}
+
+input {
+  cursor: pointer;
 }
