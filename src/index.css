@@ -22,10 +22,89 @@
   --magnolia-clr: hsl(217, 100%, 97%);
   --alabaster-clr: hsl(231, 100%, 99%);
   --white-clr: hsl(0, 0%, 100%);
+
+  --font-wt-400: 400;
+  --font-wt-500: 500;
+  --font-wt-700: 700;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+p,
+h2 {
+  margin: 0;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+/* Form Nav CSS */
+.form-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.form-nav button {
+  padding: 10px 15px;
+  border: 2px solid black;
+  border-radius: 50%;
+
+  font-weight: var(--font-wt-700);
+  background-color: transparent;
+}
+
+.active {
+  color: black;
+  background-color: var(--light-blue-clr) !important;
+}
+
+/* Step2 CSS */
+.select-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.plan {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 0.5em;
+
+  border: 2px solid var(--light-gray-clr);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.plan img {
+  height: 50px;
+}
+
+.annual-cycle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  background-color: var(--magnolia-clr);
+  color: var(--light-gray-clr);
+  font-weight: var(--font-wt-700);
+}
+
+.selected-cycle {
+  color: var(--marine-blue-clr) !important;
+}
+
+.selected-plan {
+  background-color: var(--magnolia-clr) !important;
+  border: 2px solid var(--marine-blue-clr);
 }
