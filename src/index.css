@@ -1,0 +1,31 @@
+:root {
+  font-family: "Ubuntu", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+
+  scroll-behavior: smooth;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --marine-blue-clr: hsl(213, 96%, 18%);
+  --purple-blue-clr: hsl(243, 100%, 62%);
+  --pastel-blue-clr: hsl(228, 100%, 84%);
+  --light-blue-clr: hsl(206, 94%, 87%);
+  --strawberry-clr: hsl(354, 84%, 57%);
+
+  --cool-gray-clr: hsl(231, 11%, 63%);
+  --light-gray-clr: hsl(229, 24%, 87%);
+  --magnolia-clr: hsl(217, 100%, 97%);
+  --alabaster-clr: hsl(231, 100%, 99%);
+  --white-clr: hsl(0, 0%, 100%);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
