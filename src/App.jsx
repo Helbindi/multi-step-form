@@ -13,9 +13,7 @@ function App() {
     planCycle: "monthly",
     planType: "arcade",
     planPrice: 9,
-    online: 0,
-    storage: 0,
-    profile: 0,
+    addons: [],
   });
   const [current, setCurrent] = useState(1);
 
@@ -45,24 +43,20 @@ function App() {
   useEffect(() => {
     // Update prices of Add-ons due to plan cycle change
     if (formData.planCycle === "yearly") {
-      const updateData = {
-        online: formData.online * 10,
-        storage: formData.storage * 10,
-        profile: formData.profile * 10,
-      };
-
       setFormData((prev) => {
-        return { ...prev, ...updateData };
+        const updatedAddons = prev.addons.map((item) => {
+          return { ...item, price: item.price * 10 };
+        });
+
+        return { ...prev, addons: updatedAddons };
       });
     } else {
-      const updateData = {
-        online: formData.online / 10,
-        storage: formData.storage / 10,
-        profile: formData.profile / 10,
-      };
-
       setFormData((prev) => {
-        return { ...prev, ...updateData };
+        const updatedAddons = prev.addons.map((item) => {
+          return { ...item, price: item.price / 10 };
+        });
+
+        return { ...prev, addons: updatedAddons };
       });
     }
   }, [formData.planCycle]);
@@ -70,6 +64,15 @@ function App() {
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+
+  useEffect(() => {
+    if (formData.addons.length > 1) {
+      setFormData((prev) => {
+        prev.addons.sort((a, b) => a.id - b.id);
+        return { ...prev };
+      });
+    }
+  }, [formData.addons]);
   return (
     <div className="main-container">
       {/* Track all data using Object? */}
@@ -137,9 +140,11 @@ function App() {
       </form>
 
       <div className="btn-group">
-        <button className="btn back" onClick={(e) => handleBack(e)}>
-          Go Back
-        </button>
+        {current > 1 && (
+          <button className="btn back" onClick={(e) => handleBack(e)}>
+            Go Back
+          </button>
+        )}
         {current === 4 ? (
           <button className="btn">Confirm</button>
         ) : (

@@ -37,22 +37,34 @@ function AddOns({ formData, setFormData }) {
         return { ...prev };
       });
 
+      let newAddon = {
+        name: "",
+        type: type,
+        price: addons[formData.planCycle][type],
+      };
+
       switch (type) {
         case "online": {
+          newAddon.name = "Online Service";
+          newAddon.id = 1;
           setFormData((prev) => {
-            return { ...prev, online: addons[formData.planCycle][type] };
+            return { ...prev, addons: [...prev.addons, newAddon] };
           });
           break;
         }
         case "storage": {
+          newAddon.name = "Large Storage";
+          newAddon.id = 2;
           setFormData((prev) => {
-            return { ...prev, storage: addons[formData.planCycle][type] };
+            return { ...prev, addons: [...prev.addons, newAddon] };
           });
           break;
         }
         case "profile": {
+          newAddon.name = "Customizable Profile";
+          newAddon.id = 3;
           setFormData((prev) => {
-            return { ...prev, profile: addons[formData.planCycle][type] };
+            return { ...prev, addons: [...prev.addons, newAddon] };
           });
           break;
         }
@@ -66,43 +78,30 @@ function AddOns({ formData, setFormData }) {
         return { ...prev };
       });
 
-      switch (type) {
-        case "online": {
-          setFormData((prev) => {
-            return { ...prev, online: 0 };
-          });
-          break;
-        }
-        case "storage": {
-          setFormData((prev) => {
-            return { ...prev, storage: 0 };
-          });
-          break;
-        }
-        case "profile": {
-          setFormData((prev) => {
-            return { ...prev, profile: 0 };
-          });
-          break;
-        }
-        default:
-          console.error(`No switch cases for type: ${type}`);
-      }
+      setFormData((prev) => {
+        const updateAddons = prev.addons.filter((item) => {
+          return item.type !== type;
+        });
+        return { ...prev, addons: updateAddons };
+      });
     }
   }
 
   useEffect(() => {
-    setIsChecked((prev) => {
-      let updateCheck = {
-        online: false,
-        storage: false,
-        profile: false,
-      };
-      if (formData.online > 0) updateCheck.online = true;
-      if (formData.storage > 0) updateCheck.storage = true;
-      if (formData.profile > 0) updateCheck.profile = true;
-      return { ...prev, ...updateCheck };
-    });
+    if (formData.addons.length > 0) {
+      setIsChecked((prev) => {
+        let updateCheck = {
+          online: false,
+          storage: false,
+          profile: false,
+        };
+        formData.addons.forEach((item) => {
+          updateCheck[item.type] = true;
+        });
+
+        return { ...prev, ...updateCheck };
+      });
+    }
   }, []);
 
   return (

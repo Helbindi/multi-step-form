@@ -38,17 +38,17 @@ function Plans({ formData, setFormData }) {
     const updatePrice = Number(e.target.attributes.cost.value);
     const selectedPlan = e.target.attributes.plan.value;
 
-    // Change only if different plan is selected
     if (formData.planType.toLowerCase() !== selectedPlan.toLowerCase()) {
+      // Change only if different plan is selected
       setFormData((prev) => {
         return { ...prev, planPrice: updatePrice, planType: selectedPlan };
       });
 
       // Apply and remove styling for changing selected plan
-      e.target.classList.add("selected-plan");
+      e.target.parentNode.classList.add("selected-plan");
       const parent = document.getElementsByClassName("select-plans");
       parent[0].childNodes.forEach((child) => {
-        if (child !== e.target) {
+        if (child !== e.target.parentNode) {
           child.classList.remove("selected-plan");
         }
       });
@@ -76,71 +76,82 @@ function Plans({ formData, setFormData }) {
     }
   }
 
+  useEffect(() => {
+    const images = document.getElementsByTagName("img");
+    for (const image of images) {
+      if (image.attributes.plan.value == formData.planType) {
+        image.parentNode.classList.add("selected-plan");
+      }
+    }
+  }, []);
+
   return (
     <FormContent title={title} desc={desc}>
       <div className="select-plans">
         {/* Arcade Plan */}
-        <div
-          className="plan selected-plan"
-          cost={arcadeCost}
-          plan="arcade"
-          onClick={(e) => handleSelect(e)}
-        >
-          <img src={arcade} alt="arcade-plan" />
+        <div className="plan">
+          <img
+            src={arcade}
+            alt="arcade-plan"
+            cost={arcadeCost}
+            plan="arcade"
+            onClick={(e) => handleSelect(e)}
+          />
           <article>
             <h2>Arcade</h2>
             <p>
               ${arcadeCost}/{isYearly ? "yr" : "mo"}
             </p>
-            {isYearly && <p>2 months free</p>}
+            {isYearly && <p className="yearly-plan">2 months free</p>}
           </article>
         </div>
 
         {/* Advanced Plan */}
-        <div
-          className="plan"
-          cost={advancedCost}
-          plan="advanced"
-          onClick={(e) => handleSelect(e)}
-        >
-          <img src={advanced} alt="advanced-plan" />
+        <div className="plan">
+          <img
+            src={advanced}
+            alt="advanced-plan"
+            cost={advancedCost}
+            plan="advanced"
+            onClick={(e) => handleSelect(e)}
+          />
           <article>
             <h2>Advanced</h2>
             <p>
               ${advancedCost}/{isYearly ? "yr" : "mo"}
             </p>
-            {isYearly && <p>2 months free</p>}
+            {isYearly && <p className="yearly-plan">2 months free</p>}
           </article>
         </div>
 
         {/* Pro Plan */}
-        <div
-          className="plan"
-          cost={proCost}
-          plan="pro"
-          onClick={(e) => handleSelect(e)}
-        >
-          <img src={pro} alt="pro-plan" />
+        <div className="plan">
+          <img
+            src={pro}
+            alt="pro-plan"
+            cost={proCost}
+            plan="pro"
+            onClick={(e) => handleSelect(e)}
+          />
           <article>
             <h2>Pro</h2>
             <p>
               ${proCost}/{isYearly ? "yr" : "mo"}
             </p>
-            {isYearly && <p>2 months free</p>}
+            {isYearly && <p className="yearly-plan">2 months free</p>}
           </article>
         </div>
-
-        {/* Monthly or Yearly Plan */}
-        <div className="annual-cycle">
-          <p className={isYearly ? "" : "selected-cycle"}>Monthly</p>
-          <Switch
-            className="switch"
-            onChange={(e) => toggleCycle(e)}
-            color="default"
-            checked={formData.planCycle === "monthly" ? false : true}
-          />
-          <p className={isYearly ? "selected-cycle" : ""}>Yearly</p>
-        </div>
+      </div>
+      {/* Monthly or Yearly Plan */}
+      <div className="annual-cycle">
+        <p className={isYearly ? "" : "selected-cycle"}>Monthly</p>
+        <Switch
+          className="switch"
+          onChange={(e) => toggleCycle(e)}
+          color="default"
+          checked={formData.planCycle === "monthly" ? false : true}
+        />
+        <p className={isYearly ? "selected-cycle" : ""}>Yearly</p>
       </div>
     </FormContent>
   );

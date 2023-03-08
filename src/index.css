@@ -189,11 +189,15 @@ form {
 
   border: 2px solid var(--light-gray-clr);
   border-radius: 10px;
-  cursor: pointer;
 }
 
 .plan img {
   height: 50px;
+  cursor: pointer;
+}
+
+.yearly-plan {
+  color: var(--marine-blue-clr) !important;
 }
 
 .annual-cycle {
@@ -241,10 +245,14 @@ input {
 }
 
 /* Summary CSS */
-.summary {
+.summary-container {
   padding: 1em;
   border-radius: 10px;
   background-color: var(--alabaster-clr);
+}
+
+.summary-container hr {
+  border: 1px solid var(--light-gray-clr);
 }
 
 .summary-plan {
@@ -252,22 +260,55 @@ input {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1em 1em 1em;
   font-weight: var(--font-wt-700);
   position: relative;
+
+  padding-bottom: 25px;
 }
 
 .change-plan {
   cursor: pointer;
   position: absolute;
-  bottom: -5px;
-  left: 16px;
+  bottom: 5px;
+  left: 10px;
   font-size: 0.8rem;
+  font-weight: var(--font-wt-700);
+}
+
+.change-plan:hover {
   border-bottom: 2px solid var(--cool-gray-clr);
 }
 
 .summary-plan p::first-letter {
   text-transform: uppercase;
+}
+
+.summary-addon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.summary-addon:not(:last-child) {
+  margin: 1em 0;
+}
+
+.summary-pricing {
+  color: var(--marine-blue-clr) !important;
+}
+
+.summary-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 0 1em;
+}
+
+.total-price {
+  color: var(--purple-blue-clr) !important;
+  font-weight: var(--font-wt-700);
 }
 
 @media screen and (min-width: 768px) {
@@ -296,8 +337,7 @@ input {
     grid-area: nav;
     position: initial;
     height: 100%;
-    width: 100%;
-    min-width: 250px;
+    width: 250px;
     padding-top: 0;
     border-radius: 1em;
     color: var(--white-clr);
@@ -347,13 +387,29 @@ input {
     margin-top: 0;
     border-radius: 0;
     box-shadow: none;
-    height: 450px;
-    width: 400px;
+    min-height: 450px;
+  }
+
+  .form-desc {
+    margin-bottom: 1em;
   }
 
   .btn-group {
     grid-area: btns;
     max-height: 50px;
     position: initial;
+  }
+
+  .select-plans {
+    flex-direction: row;
+  }
+
+  .plan {
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+  }
+  .annual-cycle {
+    height: 50px;
   }
 }
