@@ -40,7 +40,9 @@ function PersonInfo({ formData, setFormData }) {
     <FormContent title={title} desc={desc}>
       <div className="info">
         <label htmlFor="name">Name</label>
+        <p className="error-prompt">This field is required</p>
         <input
+          className="info-input"
           type="text"
           name="name"
           id="name"
@@ -51,7 +53,9 @@ function PersonInfo({ formData, setFormData }) {
       </div>
       <div className="info">
         <label htmlFor="email">Email Address</label>
+        <p className="error-prompt">This field is required</p>
         <input
+          className="info-input"
           type="text"
           name="email"
           id="email"
@@ -62,7 +66,9 @@ function PersonInfo({ formData, setFormData }) {
       </div>
       <div className="info">
         <label htmlFor="phone">Phone Number</label>
+        <p className="error-prompt">This field is required</p>
         <input
+          className="info-input"
           type="text"
           name="phone"
           id="phone"

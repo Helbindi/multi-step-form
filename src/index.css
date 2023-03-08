@@ -114,6 +114,7 @@ form {
   z-index: 10;
 }
 
+/* Buttons CSS */
 .btn-group {
   position: absolute;
   bottom: 0;
@@ -143,7 +144,7 @@ form {
 
 .btn:hover,
 .btn:focus {
-  background-color: var(--purple-blue-clr);
+  background-color: var(--pastel-blue-clr);
 }
 
 .back {
@@ -153,33 +154,55 @@ form {
 
 .back:hover,
 .back:focus {
-  background-color: var(--light-gray-clr);
+  color: var(--marine-blue-clr);
+  background-color: transparent;
 }
 
 /* Info CSS */
 .info {
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: var(--font-wt-500);
   color: var(--marine-blue-clr);
   gap: 5px;
+
+  position: relative;
 }
 
 .info input {
   outline: none;
-  height: 2.5;
-  padding: 0.5em;
+  padding: 0.75em;
 
-  font-size: 1.1rem;
-  color: var(--purple-blue-clr);
+  font-size: 1rem;
+  color: var(--marine-blue-clr);
   font-weight: var(--font-wt-700);
   border-radius: 5px;
+
+  border: 2px solid var(--light-gray-clr);
+}
+
+.info input:focus {
+  border: 2px solid var(--marine-blue-clr);
 }
 
 .info input::placeholder {
   color: var(--cool-gray-clr);
   font-weight: var(--font-wt-700);
+}
+
+.txt-missing {
+  border: 2px solid var(--strawberry-clr) !important;
+}
+
+.error-prompt {
+  position: absolute;
+  right: 0;
+
+  display: none;
+  color: var(--strawberry-clr) !important;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 /* Plans CSS */

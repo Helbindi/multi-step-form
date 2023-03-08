@@ -28,7 +28,8 @@ function AddOns({ formData, setFormData }) {
   const cycle = formData.planCycle === "monthly" ? "mo" : "yr";
 
   function handleClick(e) {
-    let type = e.target.attributes.id.value;
+    console.log(e.target);
+    let type = e.target.attributes.getNamedItem("id").value;
 
     if (isChecked[type] === false) {
       e.target.parentNode.classList.add("selected-addon");

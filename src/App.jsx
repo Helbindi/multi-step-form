@@ -20,27 +20,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    let empty = [];
-    const keys = Object.keys(formData);
-    for (const key of keys) {
-      if (formData[key] === "") {
-        empty.push(key);
-      }
-    }
-
-    if (empty.length > 0) {
-      let errMsg = "Please fill out the following: ";
-      empty.forEach((item, idx) => {
-        if (idx === 0) {
-          errMsg += `${item}`;
-        } else {
-          errMsg += `, ${item}`;
-        }
-      });
-      alert(errMsg);
-    } else {
-      setIsSubmitted(true);
-    }
+    setIsSubmitted(true);
   }
 
   function handleBack(e) {
@@ -54,10 +34,39 @@ function App() {
 
   function handleNext(e) {
     e.preventDefault();
-    if (current < 5) {
-      setCurrent((prev) => {
-        return prev + 1;
-      });
+
+    // Check is any of the input[text] fields are empty
+    let emptyKeys = [];
+    const keys = Object.keys(formData);
+    for (const key of keys) {
+      if (formData[key] === "") {
+        emptyKeys.push(key);
+      }
+    }
+
+    // If any empty text fields, stay on info form and display error msg
+    if (current === 1 && emptyKeys.length > 0) {
+      const inputs = document.getElementsByClassName("info-input");
+      for (const input of inputs) {
+        for (const key of emptyKeys) {
+          if (input.attributes.getNamedItem("id").value === key) {
+            input.classList.add("txt-missing");
+            input.previousSibling.style.display = "block";
+            setTimeout(() => {
+              input.classList.remove("txt-missing");
+              input.previousSibling.style.display = "none";
+            }, 1500);
+          }
+        }
+      }
+    } else {
+      if (current < 5) {
+        setCurrent((prev) => {
+          return prev + 1;
+        });
+        // Remove keyboard focus after clicking button
+        e.target.blur();
+      }
     }
   }
 
