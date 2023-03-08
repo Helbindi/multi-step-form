@@ -3,6 +3,7 @@ import "./index.css";
 import PersonInfo from "./components/PersonInfo";
 import Plans from "./components/Plans";
 import AddOns from "./components/AddOns";
+import Summary from "./components/Summary";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -69,19 +70,39 @@ function App() {
   useEffect(() => {
     console.log(formData);
   }, [formData]);
-
-  useEffect(() => {
-    console.log(current);
-  }, [current]);
   return (
     <div className="main-container">
       {/* Track all data using Object? */}
       {/* Display all form steps and highlight current */}
       <div className="form-nav">
-        <button className={current === 1 ? "active" : ""}>1</button>
-        <button className={current === 2 ? "active" : ""}>2</button>
-        <button className={current === 3 ? "active" : ""}>3</button>
-        <button className={current === 4 ? "active" : ""}>4</button>
+        <div className="steps">
+          <button className={current === 1 ? "active" : ""}>1</button>
+          <div className="step">
+            <h3>Step 1</h3>
+            <p>Your Info</p>
+          </div>
+        </div>
+        <div className="steps">
+          <button className={current === 2 ? "active" : ""}>2</button>
+          <div className="step">
+            <h3>Step 2</h3>
+            <p>Select Plan</p>
+          </div>
+        </div>
+        <div className="steps">
+          <button className={current === 3 ? "active" : ""}>3</button>
+          <div className="step">
+            <h3>Step 3</h3>
+            <p>Add-Ons</p>
+          </div>
+        </div>
+        <div className="steps">
+          <button className={current === 4 ? "active" : ""}>4</button>
+          <div className="step">
+            <h3>Step 4</h3>
+            <p>Summary</p>
+          </div>
+        </div>
       </div>
 
       {/* 
@@ -110,19 +131,23 @@ function App() {
         {current === 3 && (
           <AddOns formData={formData} setFormData={setFormData} />
         )}
-        <div className="btn-group">
-          <button className="btn back" onClick={(e) => handleBack(e)}>
-            Go Back
-          </button>
-          {current === 4 ? (
-            <button className="btn">Submit</button>
-          ) : (
-            <button className="btn" onClick={(e) => handleNext(e)}>
-              Next Step
-            </button>
-          )}
-        </div>
+        {current === 4 && (
+          <Summary formData={formData} setCurrent={setCurrent} />
+        )}
       </form>
+
+      <div className="btn-group">
+        <button className="btn back" onClick={(e) => handleBack(e)}>
+          Go Back
+        </button>
+        {current === 4 ? (
+          <button className="btn">Confirm</button>
+        ) : (
+          <button className="btn" onClick={(e) => handleNext(e)}>
+            Next Step
+          </button>
+        )}
+      </div>
     </div>
   );
 }
