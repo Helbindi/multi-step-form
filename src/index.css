@@ -141,9 +141,19 @@ form {
   border-radius: 10px;
 }
 
+.btn:hover,
+.btn:focus {
+  background-color: var(--purple-blue-clr);
+}
+
 .back {
   color: var(--cool-gray-clr);
   background-color: transparent;
+}
+
+.back:hover,
+.back:focus {
+  background-color: var(--light-gray-clr);
 }
 
 /* Info CSS */
@@ -266,6 +276,10 @@ input {
   padding-bottom: 25px;
 }
 
+.plan-title {
+  color: var(--marine-blue-clr) !important;
+}
+
 .change-plan {
   cursor: pointer;
   position: absolute;
@@ -275,8 +289,10 @@ input {
   font-weight: var(--font-wt-700);
 }
 
-.change-plan:hover {
-  border-bottom: 2px solid var(--cool-gray-clr);
+.change-plan:hover,
+.change-plan:focus {
+  color: var(--purple-blue-clr);
+  border-bottom: 2px solid var(--purple-blue-clr);
 }
 
 .summary-plan p::first-letter {
@@ -309,6 +325,25 @@ input {
 .total-price {
   color: var(--purple-blue-clr) !important;
   font-weight: var(--font-wt-700);
+}
+
+/* Confirmation CSS */
+.thank-content {
+  padding: 5em 2em;
+}
+
+.thank-img {
+  height: 75px;
+}
+
+.thank-title {
+  color: var(--marine-blue-clr);
+  text-align: center;
+}
+
+.thank-desc {
+  color: var(--cool-gray-clr);
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -398,6 +433,13 @@ input {
     grid-area: btns;
     max-height: 50px;
     position: initial;
+  }
+
+  .thank-content {
+    padding: 2em;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
   }
 
   .select-plans {

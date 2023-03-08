@@ -16,10 +16,31 @@ function App() {
     addons: [],
   });
   const [current, setCurrent] = useState(1);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
+    let empty = [];
+    const keys = Object.keys(formData);
+    for (const key of keys) {
+      if (formData[key] === "") {
+        empty.push(key);
+      }
+    }
+
+    if (empty.length > 0) {
+      let errMsg = "Please fill out the following: ";
+      empty.forEach((item, idx) => {
+        if (idx === 0) {
+          errMsg += `${item}`;
+        } else {
+          errMsg += `, ${item}`;
+        }
+      });
+      alert(errMsg);
+    } else {
+      setIsSubmitted(true);
+    }
   }
 
   function handleBack(e) {
@@ -40,8 +61,8 @@ function App() {
     }
   }
 
+  // Update prices of Add-ons due to plan cycle change
   useEffect(() => {
-    // Update prices of Add-ons due to plan cycle change
     if (formData.planCycle === "yearly") {
       setFormData((prev) => {
         const updatedAddons = prev.addons.map((item) => {
@@ -61,10 +82,7 @@ function App() {
     }
   }, [formData.planCycle]);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
+  // Sort all add-ons
   useEffect(() => {
     if (formData.addons.length > 1) {
       setFormData((prev) => {
@@ -75,7 +93,6 @@ function App() {
   }, [formData.addons]);
   return (
     <div className="main-container">
-      {/* Track all data using Object? */}
       {/* Display all form steps and highlight current */}
       <div className="form-nav">
         <div className="steps">
@@ -108,22 +125,7 @@ function App() {
         </div>
       </div>
 
-      {/* 
-        Display Form - 5 different States
-          Form 1: Personal Info = x3 input[text]
-          Form 2: Select Plan = x3 plan selectables && pricing(monthly/yearly) toggle
-          Form 3: Add-ons = x3 input[radio] && pricing(monthly/yearly) 
-          Form 4: Summary = Display selections and pricing
-          Submit 5: Thank You! Confirmation Page
-      */}
-
-      {/* 
-        Reusables? 
-          1. Form itself containing all the UI = Header => Inputs
-          2. Form 1-3 all contain the same input types
-          3. Button for Next step and confirm
-      */}
-
+      {/* Display Form */}
       <form onSubmit={(e) => handleSubmit(e)}>
         {current === 1 && (
           <PersonInfo formData={formData} setFormData={setFormData} />
@@ -135,24 +137,35 @@ function App() {
           <AddOns formData={formData} setFormData={setFormData} />
         )}
         {current === 4 && (
-          <Summary formData={formData} setCurrent={setCurrent} />
+          <Summary
+            formData={formData}
+            setCurrent={setCurrent}
+            isSubmitted={isSubmitted}
+          />
         )}
-      </form>
 
-      <div className="btn-group">
-        {current > 1 && (
-          <button className="btn back" onClick={(e) => handleBack(e)}>
-            Go Back
-          </button>
-        )}
-        {current === 4 ? (
-          <button className="btn">Confirm</button>
-        ) : (
-          <button className="btn" onClick={(e) => handleNext(e)}>
-            Next Step
-          </button>
-        )}
-      </div>
+        {/* Form Buttons */}
+        <div className="btn-group">
+          {current > 1 && !isSubmitted && (
+            <button className="btn back" onClick={(e) => handleBack(e)}>
+              Go Back
+            </button>
+          )}
+          {current === 4 && !isSubmitted && (
+            <input
+              id="submit-btn"
+              className="btn"
+              type="submit"
+              value="Confirm"
+            />
+          )}
+          {current !== 4 && !isSubmitted && (
+            <button className="btn" onClick={(e) => handleNext(e)}>
+              Next Step
+            </button>
+          )}
+        </div>
+      </form>
     </div>
   );
 }
