@@ -28,7 +28,6 @@ function AddOns({ formData, setFormData }) {
   const cycle = formData.planCycle === "monthly" ? "mo" : "yr";
 
   function handleClick(e) {
-    e.preventDefault();
     // e.target vs e.currentTarget
     let type = e.currentTarget.attributes.getNamedItem("addon").value;
 

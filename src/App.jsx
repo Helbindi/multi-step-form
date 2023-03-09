@@ -158,26 +158,28 @@ function App() {
         )}
 
         {/* Form Buttons */}
-        <div className="btn-group">
-          {current > 1 && !isSubmitted && (
-            <button className="btn back" onClick={(e) => handleBack(e)}>
-              Go Back
-            </button>
-          )}
-          {current === 4 && !isSubmitted && (
-            <input
-              id="submit-btn"
-              className="btn"
-              type="submit"
-              value="Confirm"
-            />
-          )}
-          {current !== 4 && !isSubmitted && (
-            <button className="btn" onClick={(e) => handleNext(e)}>
-              Next Step
-            </button>
-          )}
-        </div>
+        {!isSubmitted && (
+          <div className="btn-group">
+            {current > 1 && !isSubmitted && (
+              <button className="btn back" onClick={(e) => handleBack(e)}>
+                Go Back
+              </button>
+            )}
+            {current === 4 && !isSubmitted && (
+              <input
+                id="submit-btn"
+                className="btn"
+                type="submit"
+                value="Confirm"
+              />
+            )}
+            {current !== 4 && !isSubmitted && (
+              <button className="btn" onClick={(e) => handleNext(e)}>
+                Next Step
+              </button>
+            )}
+          </div>
+        )}
       </form>
     </div>
   );
