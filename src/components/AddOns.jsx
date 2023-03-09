@@ -28,11 +28,12 @@ function AddOns({ formData, setFormData }) {
   const cycle = formData.planCycle === "monthly" ? "mo" : "yr";
 
   function handleClick(e) {
-    console.log(e.target);
-    let type = e.target.attributes.getNamedItem("id").value;
+    e.preventDefault();
+    // e.target vs e.currentTarget
+    let type = e.currentTarget.attributes.getNamedItem("addon").value;
 
     if (isChecked[type] === false) {
-      e.target.parentNode.classList.add("selected-addon");
+      e.currentTarget.classList.add("selected-addon");
       setIsChecked((prev) => {
         prev[type] = true;
         return { ...prev };
@@ -73,7 +74,7 @@ function AddOns({ formData, setFormData }) {
           console.error(`No switch cases for type: ${type}`);
       }
     } else {
-      e.target.parentNode.classList.remove("selected-addon");
+      e.currentTarget.classList.remove("selected-addon");
       setIsChecked((prev) => {
         prev[type] = false;
         return { ...prev };
@@ -109,13 +110,15 @@ function AddOns({ formData, setFormData }) {
     <FormContent title={title} desc={desc}>
       <div
         className={isChecked.online === true ? "selected-addon addon" : "addon"}
+        onClick={(e) => handleClick(e)}
+        addon="online"
       >
         <input
           type="checkbox"
           name="online"
           id="online"
           checked={isChecked.online}
-          onChange={(e) => handleClick(e)}
+          readOnly
         />
         <div>
           <h2>Online service</h2>
@@ -129,13 +132,15 @@ function AddOns({ formData, setFormData }) {
         className={
           isChecked.storage === true ? "selected-addon addon" : "addon"
         }
+        onClick={(e) => handleClick(e)}
+        addon="storage"
       >
         <input
           type="checkbox"
           name="storage"
           id="storage"
           checked={isChecked.storage}
-          onChange={(e) => handleClick(e)}
+          readOnly
         />
         <div>
           <h2>Larger storage</h2>
@@ -149,13 +154,15 @@ function AddOns({ formData, setFormData }) {
         className={
           isChecked.profile === true ? "selected-addon addon" : "addon"
         }
+        onClick={(e) => handleClick(e)}
+        addon="profile"
       >
         <input
           type="checkbox"
           name="profile"
           id="profile"
           checked={isChecked.profile}
-          onChange={(e) => handleClick(e)}
+          readOnly
         />
         <div>
           <h2>Customizable profile</h2>

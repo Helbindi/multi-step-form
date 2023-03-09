@@ -35,8 +35,10 @@ function Plans({ formData, setFormData }) {
   // Handle when user clicks on a plan
   function handleSelect(e) {
     e.preventDefault();
-    const updatePrice = Number(e.target.attributes.cost.value);
-    const selectedPlan = e.target.attributes.plan.value;
+    const updatePrice = Number(
+      e.currentTarget.attributes.getNamedItem("cost").value
+    );
+    const selectedPlan = e.currentTarget.attributes.getNamedItem("plan").value;
 
     if (formData.planType.toLowerCase() !== selectedPlan.toLowerCase()) {
       // Change only if different plan is selected
@@ -45,13 +47,13 @@ function Plans({ formData, setFormData }) {
       });
 
       // Apply and remove styling for changing selected plan
-      e.target.parentNode.classList.add("selected-plan");
-      const parent = document.getElementsByClassName("select-plans");
-      parent[0].childNodes.forEach((child) => {
-        if (child !== e.target.parentNode) {
-          child.classList.remove("selected-plan");
+      e.currentTarget.classList.add("selected-plan");
+      const allPlans = document.getElementsByClassName("plan");
+      for (const plan of allPlans) {
+        if (plan !== e.currentTarget) {
+          plan.classList.remove("selected-plan");
         }
-      });
+      }
     }
   }
 
@@ -77,10 +79,10 @@ function Plans({ formData, setFormData }) {
   }
 
   useEffect(() => {
-    const images = document.getElementsByTagName("img");
-    for (const image of images) {
-      if (image.attributes.plan.value == formData.planType) {
-        image.parentNode.classList.add("selected-plan");
+    const getPlans = document.getElementsByClassName("plan");
+    for (const plan of getPlans) {
+      if (plan.attributes.getNamedItem("plan").value == formData.planType) {
+        plan.classList.add("selected-plan");
       }
     }
   }, []);
@@ -89,32 +91,30 @@ function Plans({ formData, setFormData }) {
     <FormContent title={title} desc={desc}>
       <div className="select-plans">
         {/* Arcade Plan */}
-        <div className="plan">
-          <img
-            src={arcade}
-            alt="arcade-plan"
-            cost={arcadeCost}
-            plan="arcade"
-            onClick={(e) => handleSelect(e)}
-          />
+        <div
+          className="plan"
+          cost={arcadeCost}
+          plan="arcade"
+          onClickCapture={(e) => handleSelect(e)}
+        >
+          <img src={arcade} alt="arcade-plan" />
           <article>
             <h2>Arcade</h2>
             <p>
               ${arcadeCost}/{isYearly ? "yr" : "mo"}
             </p>
-            {isYearly && <p className="yearly-plan">2 months free</p>}
+            {isYearly && <p>2 months free</p>}
           </article>
         </div>
 
         {/* Advanced Plan */}
-        <div className="plan">
-          <img
-            src={advanced}
-            alt="advanced-plan"
-            cost={advancedCost}
-            plan="advanced"
-            onClick={(e) => handleSelect(e)}
-          />
+        <div
+          className="plan"
+          cost={advancedCost}
+          plan="advanced"
+          onClickCapture={(e) => handleSelect(e)}
+        >
+          <img src={advanced} alt="advanced-plan" />
           <article>
             <h2>Advanced</h2>
             <p>
@@ -125,14 +125,13 @@ function Plans({ formData, setFormData }) {
         </div>
 
         {/* Pro Plan */}
-        <div className="plan">
-          <img
-            src={pro}
-            alt="pro-plan"
-            cost={proCost}
-            plan="pro"
-            onClick={(e) => handleSelect(e)}
-          />
+        <div
+          className="plan"
+          cost={proCost}
+          plan="pro"
+          onClickCapture={(e) => handleSelect(e)}
+        >
+          <img src={pro} alt="pro-plan" />
           <article>
             <h2>Pro</h2>
             <p>

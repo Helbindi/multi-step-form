@@ -222,11 +222,16 @@ form {
 
   border: 2px solid var(--light-gray-clr);
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.plan:not([class*="selected-plan"]):hover,
+.plan:not([class*="selected-plan"]):focus {
+  border: 2px solid var(--marine-blue-clr);
 }
 
 .plan img {
   height: 50px;
-  cursor: pointer;
 }
 
 .yearly-plan {
@@ -250,7 +255,7 @@ form {
 
 .selected-plan {
   background-color: var(--magnolia-clr) !important;
-  border: 3px solid var(--marine-blue-clr);
+  border: 2px solid var(--marine-blue-clr);
 }
 
 /* Addons CSS */
@@ -266,15 +271,17 @@ form {
 
   border: 2px solid var(--light-gray-clr);
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.addon:not([class*="selected-addon"]):hover,
+.addon:not([class*="selected-addon"]):focus {
+  border: 2px solid var(--marine-blue-clr);
 }
 
 .selected-addon {
   background-color: var(--magnolia-clr) !important;
-  border: 3px solid var(--marine-blue-clr);
-}
-
-input {
-  cursor: pointer;
+  border: 2px solid var(--marine-blue-clr);
 }
 
 /* Summary CSS */

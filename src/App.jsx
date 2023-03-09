@@ -100,6 +100,10 @@ function App() {
       });
     }
   }, [formData.addons]);
+
+  // useEffect(() => {
+  //   console.log(formData);
+  // }, [formData]);
   return (
     <div className="main-container">
       {/* Display all form steps and highlight current */}
