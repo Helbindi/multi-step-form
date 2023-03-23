@@ -107,7 +107,7 @@ function AddOns({ formData, setFormData }) {
 
   return (
     <FormContent title={title} desc={desc}>
-      <div
+      <article
         className={isChecked.online === true ? "selected-addon addon" : "addon"}
         onClick={(e) => handleClick(e)}
         addon="online"
@@ -126,8 +126,9 @@ function AddOns({ formData, setFormData }) {
         <p>
           +${onlineCost}/{cycle}
         </p>
-      </div>
-      <div
+      </article>
+
+      <article
         className={
           isChecked.storage === true ? "selected-addon addon" : "addon"
         }
@@ -148,8 +149,9 @@ function AddOns({ formData, setFormData }) {
         <p>
           +${storageCost}/{cycle}
         </p>
-      </div>
-      <div
+      </article>
+
+      <article
         className={
           isChecked.profile === true ? "selected-addon addon" : "addon"
         }
@@ -170,7 +172,7 @@ function AddOns({ formData, setFormData }) {
         <p>
           +${profileCost}/{cycle}
         </p>
-      </div>
+      </article>
     </FormContent>
   );
 }

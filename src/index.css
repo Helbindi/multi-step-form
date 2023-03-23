@@ -44,6 +44,16 @@ h2 {
 .main-container {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.sr-only {
+  position: absolute;
+  left: -150%;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* Form Nav CSS */
@@ -425,7 +435,7 @@ form {
     margin-top: 25px;
   }
 
-  .step h3 {
+  .step p:first-of-type {
     margin: 0;
     font-size: 0.8rem;
     color: var(--cool-gray-clr);

@@ -94,6 +94,7 @@ function App() {
   // Sort all add-ons
   useEffect(() => {
     if (formData.addons.length > 1) {
+      2;
       setFormData((prev) => {
         prev.addons.sort((a, b) => a.id - b.id);
         return { ...prev };
@@ -101,42 +102,44 @@ function App() {
     }
   }, [formData.addons]);
 
-  // useEffect(() => {
+  // useEffect(() => {eps
   //   console.log(formData);
   // }, [formData]);
   return (
-    <div className="main-container">
+    <main className="main-container">
+      <h1 class="sr-only">Frontendmentor.io - Multi-step Form</h1>
+
       {/* Display all form steps and highlight current */}
-      <div className="form-nav">
+      <section title="form-steps" className="form-nav">
         <div className="steps">
           <button className={current === 1 ? "active" : ""}>1</button>
           <div className="step">
-            <h3>Step 1</h3>
+            <p>Step 1</p>
             <p>Your Info</p>
           </div>
         </div>
         <div className="steps">
           <button className={current === 2 ? "active" : ""}>2</button>
           <div className="step">
-            <h3>Step 2</h3>
+            <p>Step 2</p>
             <p>Select Plan</p>
           </div>
         </div>
         <div className="steps">
           <button className={current === 3 ? "active" : ""}>3</button>
           <div className="step">
-            <h3>Step 3</h3>
+            <p>Step 3</p>
             <p>Add-Ons</p>
           </div>
         </div>
         <div className="steps">
           <button className={current === 4 ? "active" : ""}>4</button>
           <div className="step">
-            <h3>Step 4</h3>
+            <p>Step 4</p>
             <p>Summary</p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Display Form */}
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -181,7 +184,7 @@ function App() {
           </div>
         )}
       </form>
-    </div>
+    </main>
   );
 }
 

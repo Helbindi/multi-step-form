@@ -91,55 +91,55 @@ function Plans({ formData, setFormData }) {
     <FormContent title={title} desc={desc}>
       <div className="select-plans">
         {/* Arcade Plan */}
-        <div
+        <article
           className="plan"
           cost={arcadeCost}
           plan="arcade"
           onClickCapture={(e) => handleSelect(e)}
         >
           <img src={arcade} alt="arcade-plan" />
-          <article>
+          <div>
             <h2>Arcade</h2>
             <p>
               ${arcadeCost}/{isYearly ? "yr" : "mo"}
             </p>
             {isYearly && <p>2 months free</p>}
-          </article>
-        </div>
+          </div>
+        </article>
 
         {/* Advanced Plan */}
-        <div
+        <article
           className="plan"
           cost={advancedCost}
           plan="advanced"
           onClickCapture={(e) => handleSelect(e)}
         >
           <img src={advanced} alt="advanced-plan" />
-          <article>
+          <div>
             <h2>Advanced</h2>
             <p>
               ${advancedCost}/{isYearly ? "yr" : "mo"}
             </p>
             {isYearly && <p className="yearly-plan">2 months free</p>}
-          </article>
-        </div>
+          </div>
+        </article>
 
         {/* Pro Plan */}
-        <div
+        <article
           className="plan"
           cost={proCost}
           plan="pro"
           onClickCapture={(e) => handleSelect(e)}
         >
           <img src={pro} alt="pro-plan" />
-          <article>
+          <div>
             <h2>Pro</h2>
             <p>
               ${proCost}/{isYearly ? "yr" : "mo"}
             </p>
             {isYearly && <p className="yearly-plan">2 months free</p>}
-          </article>
-        </div>
+          </div>
+        </article>
       </div>
       {/* Monthly or Yearly Plan */}
       <div className="annual-cycle">

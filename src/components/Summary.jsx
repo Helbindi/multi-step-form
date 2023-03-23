@@ -37,7 +37,7 @@ function Summary({ formData, setCurrent, isSubmitted }) {
     <>
       {isSubmitted === false ? (
         <FormContent title={title} desc={desc}>
-          <div className="summary-container">
+          <article className="summary-container">
             <div className="summary-plan">
               <p className="plan-title">{`${formData.planType} (${formData.planCycle}) `}</p>
               <p className="summary-pricing">
@@ -56,7 +56,8 @@ function Summary({ formData, setCurrent, isSubmitted }) {
                 </p>
               </div>
             ))}
-          </div>
+          </article>
+
           <div className="summary-total">
             <p>{`Total (per ${
               formData.planCycle === "monthly" ? "month" : "year"

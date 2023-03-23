@@ -38,9 +38,9 @@ function PersonInfo({ formData, setFormData }) {
   }
   return (
     <FormContent title={title} desc={desc}>
-      <div className="info">
-        <label htmlFor="name">Name</label>
+      <article className="info">
         <p className="error-prompt">This field is required</p>
+        <label htmlFor="name">Name</label>
         <input
           className="info-input"
           type="text"
@@ -50,10 +50,11 @@ function PersonInfo({ formData, setFormData }) {
           value={formData.name}
           onChange={(e) => handleChange(e)}
         />
-      </div>
-      <div className="info">
-        <label htmlFor="email">Email Address</label>
+      </article>
+
+      <article className="info">
         <p className="error-prompt">This field is required</p>
+        <label htmlFor="email">Email Address</label>
         <input
           className="info-input"
           type="text"
@@ -63,10 +64,11 @@ function PersonInfo({ formData, setFormData }) {
           value={formData.email}
           onChange={(e) => handleChange(e)}
         />
-      </div>
-      <div className="info">
-        <label htmlFor="phone">Phone Number</label>
+      </article>
+
+      <article className="info">
         <p className="error-prompt">This field is required</p>
+        <label htmlFor="phone">Phone Number</label>
         <input
           className="info-input"
           type="text"
@@ -76,7 +78,7 @@ function PersonInfo({ formData, setFormData }) {
           value={formData.phone}
           onChange={(e) => handleChange(e)}
         />
-      </div>
+      </article>
     </FormContent>
   );
 }
